@@ -45,5 +45,17 @@ public class TodoItemController {
 	public void deleteTodoItem(@PathVariable("id") Long id) {
 		todoitemService.deleteTodoItem(id);
 	}
+	
+	// ---------------------------------------------------------------------------------------
+	
+	@GetMapping("/todoitems/title/{title}")
+	public List<TodoItem> getTitleTodoItems(@PathVariable("title") String title) {
+		return todoitemService.getTitleTodoItems(title);
+	}
+	
+	@GetMapping("/todoitems/status/{status}")
+	public List<TodoItem> getStatusTodoItems(@PathVariable("status") String status) {
+		return todoitemService.getStatusTodoItems(status);
+	}
 
 }

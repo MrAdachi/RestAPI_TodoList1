@@ -65,4 +65,26 @@ public class TodoItemService {
 			}
 		}
 	}
+	
+	// ---------------------------------------------------------------------------------------
+	
+	public List<TodoItem> getTitleTodoItems(String title){
+		List<TodoItem> titletodoitems = new ArrayList<>();
+		for(TodoItem todoitem: todoitems) {
+			if(todoitem.getTitle().equals(title)) {
+				titletodoitems.add(todoitem);
+			}
+		}
+		return titletodoitems;
+	}
+	
+	public List<TodoItem> getStatusTodoItems(String status){
+		List<TodoItem> statustodoitems = new ArrayList<>();
+		for(TodoItem todoitem: todoitems) {
+			if(todoitem.getStatus().equals(status)) {
+				statustodoitems.add(todoitem);
+			}
+		}
+		return statustodoitems;
+	}
 }
