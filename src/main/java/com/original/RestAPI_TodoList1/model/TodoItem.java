@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class TodoItem {
 	
-	private int id;
+	private Long id;
 	private String title;
 	private String status;
 	private String details;
@@ -19,7 +19,7 @@ public class TodoItem {
 	private String update_datetime;
 	
 	// コンストラクタ（念のため記載）
-	public TodoItem(int id, String title, String status, String details) {
+	public TodoItem(Long id, String title, String status, String details) {
 		this.id = id;
 		this.title = title;
 		this.status = status;
