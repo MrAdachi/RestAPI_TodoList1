@@ -26,7 +26,7 @@ public class TodoItemController {
 	}
 	
 	@GetMapping("/todoitem/{id}")
-	public TodoItem getTodoItem(@PathVariable("id") String id) {
+	public TodoItem getTodoItem(@PathVariable("id") int id) {
 		return todoitemService.getTodoItem(id);
 	}
 	
@@ -36,13 +36,13 @@ public class TodoItemController {
 	}
 	
 	@PutMapping("/todoitem/{id}")
-	public void updateTodoItem(@PathVariable("id") String id,
+	public void updateTodoItem(@PathVariable("id") int id,
 			@RequestBody TodoItem todoitem) {
 		todoitemService.updateTodoItem(id, todoitem);
 	}
 	
 	@DeleteMapping("/todoitem/{id}")
-	public void deleteTodoItem(@PathVariable("id") String id) {
+	public void deleteTodoItem(@PathVariable("id") int id) {
 		todoitemService.deleteTodoItem(id);
 	}
 

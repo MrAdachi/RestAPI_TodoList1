@@ -22,10 +22,10 @@ public class TodoItemService {
 		return todoitems;
 	}
 	
-	public TodoItem getTodoItem(String id) {
+	public TodoItem getTodoItem(int id) {
 		for(int i = 0; i < todoitems.size(); i++) {
-			String get_todoitem_id = todoitems.get(i).getId();
-			if(get_todoitem_id.equals(id)) {
+			int get_todoitem_id = todoitems.get(i).getId();
+			if(get_todoitem_id == id) {
 				return todoitems.get(i);
 			}
 		}
@@ -41,10 +41,10 @@ public class TodoItemService {
 		todoitems.add(todoitem);
 	}
 	
-	public void updateTodoItem(String id, TodoItem todoitem) {
+	public void updateTodoItem(int id, TodoItem todoitem) {
 		for(int i = 0; i < todoitems.size(); i++) {
-			String update_todoitem_id = todoitems.get(i).getId();
-			if(update_todoitem_id.equals(id)) {
+			int update_todoitem_id = todoitems.get(i).getId();
+			if(update_todoitem_id == id) {
 				// 作成日時は更新前のデータから引用
 				todoitem.setCreate_datetime(todoitems.get(i).getCreate_datetime());
 				// 更新日時の初期化
@@ -57,10 +57,10 @@ public class TodoItemService {
 		}
 	}
 	
-	public void deleteTodoItem(String id) {
+	public void deleteTodoItem(int id) {
 		for(int i = 0; i < todoitems.size(); i++) {
-			String delete_todoitem_id = todoitems.get(i).getId();
-			if(delete_todoitem_id.equals(id)) {
+			int delete_todoitem_id = todoitems.get(i).getId();
+			if(delete_todoitem_id == id) {
 				todoitems.remove(i);
 			}
 		}
