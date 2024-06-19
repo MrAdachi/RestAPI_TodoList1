@@ -39,6 +39,7 @@ public class TodoItemService {
 		todoitem.setCreate_datetime(sdf.format(cl.getTime()));
 		todoitem.setUpdate_datetime(sdf.format(cl.getTime()));
 		todoitems.add(todoitem);
+		organizeTodoItem();
 	}
 	
 	public void updateTodoItem(Long id, TodoItem todoitem) {
@@ -52,7 +53,23 @@ public class TodoItemService {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 				todoitem.setUpdate_datetime(sdf.format(cl.getTime()));
 				todoitems.set(i, todoitem);
+				organizeTodoItem();
 				break;
+			}
+		}
+	}
+	
+	private void organizeTodoItem(){
+		// ListのSort(Id)
+		for(int i = 0; i < todoitems.size() - 1; i++) {
+			for(int j = 0; j < todoitems.size() - 1 - i; j++) {
+				
+				if(todoitems.get(j).getId() > todoitems.get(j+1).getId()) {
+					
+					TodoItem temporary = todoitems.get(j);
+					todoitems.set(j, todoitems.get(j+1));
+					todoitems.set(j+1, temporary);
+				}
 			}
 		}
 	}
