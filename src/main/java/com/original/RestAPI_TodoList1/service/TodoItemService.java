@@ -42,6 +42,41 @@ public class TodoItemService {
 		return statustodoitems;
 	}
 	
+	public List<TodoItem> getAllTodoItemsSortId(){
+		List<TodoItem> todoitemssortid = new ArrayList<>();
+		
+		for(TodoItem todoitem : todoitems) {
+			todoitemssortid.add(todoitem);
+		}
+		
+		// ListのSort(Id)
+		for(int i = 0; i < todoitemssortid.size() - 1; i++) {
+			for(int j = 0; j < todoitemssortid.size() - 1 - i; j++) {
+				if(todoitemssortid.get(j).getId() > todoitemssortid.get(j+1).getId()) {
+					TodoItem temporary = todoitemssortid.get(j);
+					todoitemssortid.set(j, todoitemssortid.get(j+1));
+					todoitemssortid.set(j + 1, temporary);
+				}
+			}
+		}
+		return todoitemssortid;
+	}
+	
+	public List<TodoItem> getAllTodoItemsSortStatus(){
+		List<TodoItem> todoitemssortstatus = new ArrayList<>();
+		String status_list[] = {"未着手", "進行中", "完了"};
+		
+		// ListのSort(Status)
+		for(String status : status_list) {
+			for(TodoItem todoitem : todoitems) {
+				if(todoitem.getStatus().equals(status)) {
+					todoitemssortstatus.add(todoitem);
+				}
+			}
+		}
+		return todoitemssortstatus;
+	}
+		
 	public TodoItem getTodoItem(Long id) {
 		for(int i = 0; i < todoitems.size(); i++) {
 			Long get_todoitem_id = todoitems.get(i).getId();

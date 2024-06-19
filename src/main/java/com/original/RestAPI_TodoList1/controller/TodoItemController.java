@@ -29,19 +29,31 @@ public class TodoItemController {
 		
 		String status_list[] = {"未着手", "進行中", "完了"};
 		
-		if(status == null && title == null) {
+		if (status == null && title == null) {
 			return todoitemService.getAllTodoItems();
-		} else if((Arrays.asList(status_list).contains(status)) && title == null) {
+		} else if ((Arrays.asList(status_list).contains(status)) && title == null) {
 			return todoitemService.getStatusTodoItems(status);
-		} else if(status == null && title != null) {
+		} else if (status == null && title != null) {
 			return todoitemService.getTitleTodoItems(title);
 		} else {
 			return null;
 		}
 	}
 	
+	@GetMapping("/todos/sort/{sort_name}")
+	public List<TodoItem> getSortAllTodoItems(@PathVariable(name = "sort_name", required = false) String sort_name){
+		
+		if (sort_name.equals("id")) {
+			return todoitemService.getAllTodoItemsSortId();
+		} else if (sort_name.equals("status")) {
+			return todoitemService.getAllTodoItemsSortStatus();
+		} else {
+			return null;
+		}
+	}
+	
 	@GetMapping("/todos/{id}")
-	public TodoItem getTodoItem(@PathVariable("id") Long id) {
+	public TodoItem getTodoItem(@PathVariable(name = "id") Long id) {
 		return todoitemService.getTodoItem(id);
 	}
 	
@@ -51,13 +63,13 @@ public class TodoItemController {
 	}
 	
 	@PutMapping("/todos/{id}")
-	public void updateTodoItem(@PathVariable("id") Long id,
+	public void updateTodoItem(@PathVariable(name = "id") Long id,
 			@RequestBody TodoItem todoitem) {
 		todoitemService.updateTodoItem(id, todoitem);
 	}
 	
 	@DeleteMapping("/todos/{id}")
-	public void deleteTodoItem(@PathVariable("id") Long id) {
+	public void deleteTodoItem(@PathVariable(name = "id") Long id) {
 		todoitemService.deleteTodoItem(id);
 	}
 
