@@ -24,8 +24,8 @@ public class TodoItemController {
 	
 	@GetMapping("/todos")
 	public List<TodoItem> getAllTodoItems(
-			@RequestParam(name = "status",required = false) String status,
-			@RequestParam(name = "title", required = false) String title){
+			@RequestParam(required = false) String status,
+			@RequestParam(required = false) String title){
 		
 		String status_list[] = {"未着手", "進行中", "完了"};
 		
@@ -41,7 +41,7 @@ public class TodoItemController {
 	}
 	
 	@GetMapping("/todos/sort/{sort_name}")
-	public List<TodoItem> getSortAllTodoItems(@PathVariable(name = "sort_name", required = false) String sort_name){
+	public List<TodoItem> getSortAllTodoItems(@PathVariable(required = false) String sort_name){
 		
 		if (sort_name.equals("id")) {
 			return todoitemService.getAllTodoItemsSortId();
@@ -53,7 +53,7 @@ public class TodoItemController {
 	}
 	
 	@GetMapping("/todos/{id}")
-	public TodoItem getTodoItem(@PathVariable(name = "id") Long id) {
+	public TodoItem getTodoItem(@PathVariable Long id) {
 		return todoitemService.getTodoItem(id);
 	}
 	
@@ -63,13 +63,13 @@ public class TodoItemController {
 	}
 	
 	@PutMapping("/todos/{id}")
-	public void updateTodoItem(@PathVariable(name = "id") Long id,
+	public void updateTodoItem(@PathVariable Long id,
 			@RequestBody TodoItem todoitem) {
 		todoitemService.updateTodoItem(id, todoitem);
 	}
 	
 	@DeleteMapping("/todos/{id}")
-	public void deleteTodoItem(@PathVariable(name = "id") Long id) {
+	public void deleteTodoItem(@PathVariable Long id) {
 		todoitemService.deleteTodoItem(id);
 	}
 
