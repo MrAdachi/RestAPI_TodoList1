@@ -12,111 +12,111 @@ import com.original.RestAPI_TodoList1.model.TodoItem;
 @Service
 public class TodoItemService {
 	
-	private List<TodoItem> todoitems;
+	private List<TodoItem> todoItems;
 	
 	public TodoItemService() {
-		todoitems = new ArrayList<>();
+		todoItems = new ArrayList<>();
 	}
 	
 	public List<TodoItem> getAllTodoItems(){
-		return todoitems;
+		return todoItems;
 	}
 	
 	public List<TodoItem> getTitleTodoItems(String title){
-		List<TodoItem> titletodoitems = new ArrayList<>();
-		for(TodoItem todoitem: todoitems) {
-			if(todoitem.getTitle().equals(title)) {
-				titletodoitems.add(todoitem);
+		List<TodoItem> titleTodoItems = new ArrayList<>();
+		for(TodoItem todoItem: todoItems) {
+			if(todoItem.getTitle().equals(title)) {
+				titleTodoItems.add(todoItem);
 			}
 		}
-		return titletodoitems;
+		return titleTodoItems;
 	}
 	
 	public List<TodoItem> getStatusTodoItems(String status){
-		List<TodoItem> statustodoitems = new ArrayList<>();
-		for(TodoItem todoitem: todoitems) {
-			if(todoitem.getStatus().equals(status)) {
-				statustodoitems.add(todoitem);
+		List<TodoItem> statusTodoItems = new ArrayList<>();
+		for(TodoItem todoItem: todoItems) {
+			if(todoItem.getStatus().equals(status)) {
+				statusTodoItems.add(todoItem);
 			}
 		}
-		return statustodoitems;
+		return statusTodoItems;
 	}
 	
 	public List<TodoItem> getAllTodoItemsSortId(){
-		List<TodoItem> todoitemssortid = new ArrayList<>();
+		List<TodoItem> todoItemsSortId = new ArrayList<>();
 		
-		for(TodoItem todoitem : todoitems) {
-			todoitemssortid.add(todoitem);
+		for(TodoItem todoitem : todoItems) {
+			todoItemsSortId.add(todoitem);
 		}
 		
 		// ListのSort(Id)
-		for(int i = 0; i < todoitemssortid.size() - 1; i++) {
-			for(int j = 0; j < todoitemssortid.size() - 1 - i; j++) {
-				if(todoitemssortid.get(j).getId() > todoitemssortid.get(j+1).getId()) {
-					TodoItem temporary = todoitemssortid.get(j);
-					todoitemssortid.set(j, todoitemssortid.get(j+1));
-					todoitemssortid.set(j + 1, temporary);
+		for(int i = 0; i < todoItemsSortId.size() - 1; i++) {
+			for(int j = 0; j < todoItemsSortId.size() - 1 - i; j++) {
+				if(todoItemsSortId.get(j).getId() > todoItemsSortId.get(j+1).getId()) {
+					TodoItem temporary = todoItemsSortId.get(j);
+					todoItemsSortId.set(j, todoItemsSortId.get(j+1));
+					todoItemsSortId.set(j + 1, temporary);
 				}
 			}
 		}
-		return todoitemssortid;
+		return todoItemsSortId;
 	}
 	
 	public List<TodoItem> getAllTodoItemsSortStatus(){
-		List<TodoItem> todoitemssortstatus = new ArrayList<>();
-		String status_list[] = {"未着手", "進行中", "完了"};
+		List<TodoItem> todoItemsSortStatus = new ArrayList<>();
+		String statusList[] = {"未着手", "進行中", "完了"};
 		
 		// ListのSort(Status)
-		for(String status : status_list) {
-			for(TodoItem todoitem : todoitems) {
-				if(todoitem.getStatus().equals(status)) {
-					todoitemssortstatus.add(todoitem);
+		for(String status : statusList) {
+			for(TodoItem todoItem : todoItems) {
+				if(todoItem.getStatus().equals(status)) {
+					todoItemsSortStatus.add(todoItem);
 				}
 			}
 		}
-		return todoitemssortstatus;
+		return todoItemsSortStatus;
 	}
 		
 	public TodoItem getTodoItem(Long id) {
-		for(int i = 0; i < todoitems.size(); i++) {
-			Long get_todoitem_id = todoitems.get(i).getId();
-			if(get_todoitem_id.equals(id)) {
-				return todoitems.get(i);
+		for(int i = 0; i < todoItems.size(); i++) {
+			Long getTodoItemId = todoItems.get(i).getId();
+			if(getTodoItemId.equals(id)) {
+				return todoItems.get(i);
 			}
 		}
 		return null;
 	}
 	
-	public void addTodoItem(TodoItem todoitem) {
+	public void addTodoItem(TodoItem todoItem) {
 		// 作成日時・更新日時の初期化
 		Calendar cl = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		todoitem.setCreate_datetime(sdf.format(cl.getTime()));
-		todoitem.setUpdate_datetime(sdf.format(cl.getTime()));
-		todoitems.add(todoitem);
+		todoItem.setCreateDateTime(sdf.format(cl.getTime()));
+		todoItem.setUpdateDateTime(sdf.format(cl.getTime()));
+		todoItems.add(todoItem);
 	}
 	
-	public void updateTodoItem(Long id, TodoItem todoitem) {
-		for(int i = 0; i < todoitems.size(); i++) {
-			Long update_todoitem_id = todoitems.get(i).getId();
-			if(update_todoitem_id.equals(id)) {
+	public void updateTodoItem(Long id, TodoItem todoItem) {
+		for(int i = 0; i < todoItems.size(); i++) {
+			Long updateTodoItemId = todoItems.get(i).getId();
+			if(updateTodoItemId.equals(id)) {
 				// 作成日時は更新前のデータから引用
-				todoitem.setCreate_datetime(todoitems.get(i).getCreate_datetime());
+				todoItem.setCreateDateTime(todoItems.get(i).getCreateDateTime());
 				// 更新日時の初期化
 				Calendar cl = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				todoitem.setUpdate_datetime(sdf.format(cl.getTime()));
-				todoitems.set(i, todoitem);
+				todoItem.setUpdateDateTime(sdf.format(cl.getTime()));
+				todoItems.set(i, todoItem);
 				break;
 			}
 		}
 	}
 	
 	public void deleteTodoItem(Long id) {
-		for(int i = 0; i < todoitems.size(); i++) {
-			Long delete_todoitem_id = todoitems.get(i).getId();
-			if(delete_todoitem_id.equals(id)) {
-				todoitems.remove(i);
+		for(int i = 0; i < todoItems.size(); i++) {
+			Long deleteTodoitemId = todoItems.get(i).getId();
+			if(deleteTodoitemId.equals(id)) {
+				todoItems.remove(i);
 			}
 		}
 	}

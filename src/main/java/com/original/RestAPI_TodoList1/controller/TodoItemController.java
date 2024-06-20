@@ -20,33 +20,33 @@ import com.original.RestAPI_TodoList1.service.TodoItemService;
 public class TodoItemController {
 	
 	@Autowired
-	private TodoItemService todoitemService;
+	private TodoItemService todoItemService;
 	
 	@GetMapping("/todos")
 	public List<TodoItem> getAllTodoItems(
 			@RequestParam(required = false) String status,
 			@RequestParam(required = false) String title){
 		
-		String status_list[] = {"未着手", "進行中", "完了"};
+		String statusList[] = {"未着手", "進行中", "完了"};
 		
 		if (status == null && title == null) {
-			return todoitemService.getAllTodoItems();
-		} else if ((Arrays.asList(status_list).contains(status)) && title == null) {
-			return todoitemService.getStatusTodoItems(status);
+			return todoItemService.getAllTodoItems();
+		} else if ((Arrays.asList(statusList).contains(status)) && title == null) {
+			return todoItemService.getStatusTodoItems(status);
 		} else if (status == null && title != null) {
-			return todoitemService.getTitleTodoItems(title);
+			return todoItemService.getTitleTodoItems(title);
 		} else {
 			return null;
 		}
 	}
 	
-	@GetMapping("/todos/sort/{sort_name}")
-	public List<TodoItem> getSortAllTodoItems(@PathVariable(required = false) String sort_name){
+	@GetMapping("/todos/sort/{sortName}")
+	public List<TodoItem> getSortAllTodoItems(@PathVariable(required = false) String sortName){
 		
-		if (sort_name.equals("id")) {
-			return todoitemService.getAllTodoItemsSortId();
-		} else if (sort_name.equals("status")) {
-			return todoitemService.getAllTodoItemsSortStatus();
+		if (sortName.equals("id")) {
+			return todoItemService.getAllTodoItemsSortId();
+		} else if (sortName.equals("status")) {
+			return todoItemService.getAllTodoItemsSortStatus();
 		} else {
 			return null;
 		}
@@ -54,23 +54,23 @@ public class TodoItemController {
 	
 	@GetMapping("/todos/{id}")
 	public TodoItem getTodoItem(@PathVariable Long id) {
-		return todoitemService.getTodoItem(id);
+		return todoItemService.getTodoItem(id);
 	}
 	
 	@PostMapping("/todos")
 	public void addTodoItem(@RequestBody TodoItem todoitem) {
-		todoitemService.addTodoItem(todoitem);
+		todoItemService.addTodoItem(todoitem);
 	}
 	
 	@PutMapping("/todos/{id}")
 	public void updateTodoItem(@PathVariable Long id,
 			@RequestBody TodoItem todoitem) {
-		todoitemService.updateTodoItem(id, todoitem);
+		todoItemService.updateTodoItem(id, todoitem);
 	}
 	
 	@DeleteMapping("/todos/{id}")
 	public void deleteTodoItem(@PathVariable Long id) {
-		todoitemService.deleteTodoItem(id);
+		todoItemService.deleteTodoItem(id);
 	}
 
 }
